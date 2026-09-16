@@ -16,6 +16,7 @@ import frc.robot.commands.Intake;
 import frc.robot.commands.LaunchSequence;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANFuelSubsystem;
+// import com.pathplanner.lib.commands.PathPlannerAuto;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -44,11 +45,15 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
+    /* 
+      Register all named commands for the pathplanner api here.
+    */
+
     configureBindings();
 
-    // Set the options to show up in the Dashboard for selecting auto modes. If you
-    // add additional auto modes you can add additional lines here with
-    // autoChooser.addOption
+    // autoChooser = AutoBuilder.buildAutoChooser(); // METHOD #1 - ALL AUTOS LAODED-- See Docs.
+    // SmartDashboard.putData("Auto Chooser", autoChooser); // If wishing to push data to the dashboard. 
     autoChooser.setDefaultOption("Autonomous", new ExampleAuto(driveSubsystem, fuelSubsystem));
   }
 
@@ -91,6 +96,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return autoChooser.getSelected();
+    // return new PathPlannerAuto("Example Auto"); // This is for METHOD #2 - SPECIFIC AUTOS -- See Docs. 
+    return autoChooser.getSelected(); // METHOD #1 - ALL AUTOS LAODED-- See Docs.
   }
 }
