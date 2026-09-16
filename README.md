@@ -7,4 +7,3 @@ Source code will need to be refactored for the Neo motors and SPARKMAX speed con
 * [REBUILT Kitbot](https://www.firstinspires.org/resources/library/frc/kitbot) 
 * [Source Code](https://firstfrc.blob.core.windows.net/frc2026/KitBot/2026-kitbot-code.zip)
 
-* 
