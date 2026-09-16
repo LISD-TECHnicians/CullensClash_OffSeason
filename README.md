@@ -6,6 +6,7 @@ Source code will need to be refactored for the Neo motors and SPARKMAX speed con
 ### Resources and Links:
 * [REBUILT Kitbot](https://www.firstinspires.org/resources/library/frc/kitbot) 
 * [Source Code](https://firstfrc.blob.core.windows.net/frc2026/KitBot/2026-kitbot-code.zip)
+* [Phoenix6 Java API](https://api.ctr-electronics.com/phoenix6/stable/java/)
 
 ### TODO
 * Refactor the subsystem and command files to use the proper libraries, objects, and methods for the SPARKMAX.
