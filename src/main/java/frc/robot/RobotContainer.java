@@ -1,10 +1,8 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -16,15 +14,10 @@ import frc.robot.commands.Intake;
 import frc.robot.commands.LaunchSequence;
 import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANFuelSubsystem;
-// import com.pathplanner.lib.commands.PathPlannerAuto;
 
-/**
- * This class is where the bulk of the robot should be declared. Since
- * Command-based is a "declarative" paradigm, very little robot logic should
- * actually be handled in the {@link Robot} periodic methods (other than the
- * scheduler calls). Instead, the structure of the robot (including subsystems,
- * commands, and trigger mappings) should be declared here.
- */
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
 public class RobotContainer {
   // The robot's subsystems
   private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
@@ -39,7 +32,7 @@ public class RobotContainer {
       OPERATOR_CONTROLLER_PORT);
 
   // The autonomous chooser
-  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
+  private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -52,8 +45,8 @@ public class RobotContainer {
 
     configureBindings();
 
-    // autoChooser = AutoBuilder.buildAutoChooser(); // METHOD #1 - ALL AUTOS LAODED-- See Docs.
-    // SmartDashboard.putData("Auto Chooser", autoChooser); // If wishing to push data to the dashboard. 
+    autoChooser = AutoBuilder.buildAutoChooser(); // METHOD #1 - ALL AUTOS LAODED-- See Docs.
+    SmartDashboard.putData("Auto Chooser", autoChooser); // If wishing to push data to the dashboard. 
     autoChooser.setDefaultOption("Autonomous", new ExampleAuto(driveSubsystem, fuelSubsystem));
   }
 
@@ -70,21 +63,13 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    // While the left bumper on operator controller is held, intake Fuel
-    operatorController.leftBumper().whileTrue(new Intake(fuelSubsystem));
-    // While the right bumper on the operator controller is held, spin up for 1
-    // second, then launch fuel. When the button is released, stop.
-    operatorController.rightBumper().whileTrue(new LaunchSequence(fuelSubsystem));
-    // While the A button is held on the operator controller, eject fuel back out
-    // the intake
+    operatorController.rightBumper().whileTrue(new Intake(fuelSubsystem));
+   
+    operatorController.leftBumper().whileTrue(new LaunchSequence(fuelSubsystem));
+
     operatorController.a().whileTrue(new Eject(fuelSubsystem));
 
-    // Set the default command for the drive subsystem to the command provided by
-    // factory with the values provided by the joystick axes on the driver
-    // controller. The Y axis of the controller is inverted so that pushing the
-    // stick away from you (a negative value) drives the robot forwards (a positive
-    // value)
-    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, driverController));
+    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, driverController, () -> driverController.leftBumper().getAsBoolean()));
 
     fuelSubsystem.setDefaultCommand(fuelSubsystem.run(() -> fuelSubsystem.stop()));
   }
@@ -95,7 +80,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
+
     // return new PathPlannerAuto("Example Auto"); // This is for METHOD #2 - SPECIFIC AUTOS -- See Docs. 
     return autoChooser.getSelected(); // METHOD #1 - ALL AUTOS LAODED-- See Docs.
   }

@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkBase.PersistMode;
@@ -13,8 +9,12 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.DriveConstants.*;
-// import com.pathpalnner.lib.config.RobotConfig; 
-// import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.config.RobotConfig; 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.controllers.PPLTVController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
 
 public class CANDriveSubsystem extends SubsystemBase {
   private final SparkMax leftLeader;
@@ -25,10 +25,10 @@ public class CANDriveSubsystem extends SubsystemBase {
   private final DifferentialDrive drive;
 
   public CANDriveSubsystem() {
-    leftLeader = new SparkMax(LEFT_LEADER_ID, MotorType.kBrushed);
-    leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushed);
-    rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushed);
-    rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushed);
+    leftLeader = new SparkMax(LEFT_LEADER_ID, MotorType.kBrushless);
+    leftFollower = new SparkMax(LEFT_FOLLOWER_ID, MotorType.kBrushless);
+    rightLeader = new SparkMax(RIGHT_LEADER_ID, MotorType.kBrushless);
+    rightFollower = new SparkMax(RIGHT_FOLLOWER_ID, MotorType.kBrushless);
 
     drive = new DifferentialDrive(leftLeader, rightLeader);
 
@@ -53,10 +53,10 @@ public class CANDriveSubsystem extends SubsystemBase {
     config.inverted(true);
     leftLeader.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-    /* Pathplanner boilerplate for configuration.
+   
     RobotConfig robotConfig; 
     try {
-      robotConfig = RobotConfig.fromGIUSettings();
+      robotConfig = RobotConfig.fromGUISettings();
     }
     catch (Exception exp) {
       exp.printStackTrace();
@@ -77,18 +77,26 @@ public class CANDriveSubsystem extends SubsystemBase {
               }
               return false;
             },
-            this // Reference to this subsystem to set requirements
+            this
     );
     
-    */ 
+    
     
   }
 
   @Override
   public void periodic() {
+    //rightLeader.setVoltage(8);
   }
 
   public void driveArcade(double xSpeed, double zRotation) {
     drive.arcadeDrive(xSpeed, zRotation);
   }
+
+  //TODO: Need to complete these methods implementations to get pathplanner ready. 
+  private Pose2d getPose() {}  
+  private void resetPose(Pose2d resetPose) {} 
+  private ChassisSpeeds getRobotRelativeSpeeds() {} 
+  private void driveRobotRelative(ChassisSpeeds chassisSpeed) {}
+
 }
