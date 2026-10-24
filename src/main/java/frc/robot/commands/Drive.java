@@ -53,7 +53,7 @@ public class Drive extends Command {
   @Override
   public void execute() {
     driveSubsystem.driveArcade(MathUtil.applyDeadband(controller.getLeftY(), DRIVE_DEADBAND) * drive_scale, 
-      MathUtil.applyDeadband(controller.getLeftX(), DRIVE_DEADBAND) * rotate_scale);
+      MathUtil.applyDeadband(controller.getRightX(), DRIVE_DEADBAND) * rotate_scale);
   }
 
   // Called once the command ends or is interrupted.

@@ -32,7 +32,7 @@ public class RobotContainer {
       OPERATOR_CONTROLLER_PORT);
 
   // The autonomous chooser
-  private SendableChooser<Command> autoChooser = new SendableChooser<>();
+  private SendableChooser<Command> autoChooser;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -79,9 +79,10 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  
   public Command getAutonomousCommand() {
 
-    // return new PathPlannerAuto("Example Auto"); // This is for METHOD #2 - SPECIFIC AUTOS -- See Docs. 
-    return autoChooser.getSelected(); // METHOD #1 - ALL AUTOS LAODED-- See Docs.
+    return new PathPlannerAuto("Example"); // This is for METHOD #2 - SPECIFIC AUTOS -- See Docs. 
+    //return autoChooser.getSelected(); // METHOD #1 - ALL AUTOS LAODED-- See Docs.
   }
 }

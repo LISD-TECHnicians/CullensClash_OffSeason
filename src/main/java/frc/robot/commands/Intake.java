@@ -33,7 +33,7 @@ public class Intake extends Command {
   // command doesn't require updating any values while running
   @Override
   public void execute() {
-    fuelSubsystem.setIntakeLauncherRoller(12);
+    fuelSubsystem.setIntakeLauncherRoller(8); //12
     fuelSubsystem.setFeederRoller(10);
   }
 

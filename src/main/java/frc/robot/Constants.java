@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.units.measure.MomentOfInertia;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -25,6 +27,13 @@ public final class Constants {
     // Current limit for drivetrain motors. 60A is a reasonable maximum to reduce
     // likelihood of tripping breakers or damaging CIM motors
     public static final int DRIVE_MOTOR_CURRENT_LIMIT = 60;
+    public static final double MAX_SPEED_METERS_PER_SEC = 2.25;
+    public static final double TRACK_WIDTH = .5588; // Meters
+    public static final double WEIGHT_KG = 33.112; // with Battery 
+    public static final double GEAR_RATIO = 8.45; // 8.45:1 
+    public static final double WHEEL_DIAMETER = 0.1016; // Meters
+    public static final double WHEEL_CIRCUM = 2 * Math.PI * WHEEL_DIAMETER;
+    public static final double ROTATIONS_METER = (1 / WHEEL_CIRCUM) * GEAR_RATIO;
   }
 
   public static final class FuelConstants {
