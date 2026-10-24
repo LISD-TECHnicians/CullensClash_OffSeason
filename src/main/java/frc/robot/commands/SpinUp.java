@@ -1,7 +1,6 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,16 +23,18 @@ public class SpinUp extends Command {
   // appropriate values for intaking
   @Override
   public void initialize() {
-    fuelSubsystem
-        .setIntakeLauncherRoller(
-            SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
-    fuelSubsystem.setFeederRoller(SmartDashboard.getNumber("Launching spin-up feeder value", SPIN_UP_FEEDER_VOLTAGE));
+    //fuelSubsystem
+    //    .setIntakeLauncherRoller(
+    //        SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
+    //fuelSubsystem.setFeederRoller(10);//SmartDashboard.getNumber("Launching spin-up feeder value", SPIN_UP_FEEDER_VOLTAGE));
   }
 
   // Called every time the scheduler runs while the command is scheduled. This
   // command doesn't require updating any values while running
   @Override
   public void execute() {
+    fuelSubsystem.setFeederRoller(-8); 
+    fuelSubsystem.setIntakeLauncherRoller(-7); // testing values here
   }
 
   // Called once the command ends or is interrupted. Stop the rollers
@@ -41,7 +42,7 @@ public class SpinUp extends Command {
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
+  // Returns true when the command should end
   @Override
   public boolean isFinished() {
     return false;
