@@ -33,8 +33,8 @@ public class SpinUp extends Command {
   // command doesn't require updating any values while running
   @Override
   public void execute() {
-    fuelSubsystem.setFeederRoller(10); // testing values here
-    fuelSubsystem.setIntakeLauncherRoller(-10); 
+    fuelSubsystem.setFeederRoller(-8); 
+    fuelSubsystem.setIntakeLauncherRoller(-7); // testing values here
   }
 
   // Called once the command ends or is interrupted. Stop the rollers
@@ -42,7 +42,7 @@ public class SpinUp extends Command {
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
+  // Returns true when the command should end
   @Override
   public boolean isFinished() {
     return false;
