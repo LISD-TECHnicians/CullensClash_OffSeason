@@ -81,8 +81,8 @@ public class RobotContainer {
    */
   
   public Command getAutonomousCommand() {
-
-    return new PathPlannerAuto("Example"); // This is for METHOD #2 - SPECIFIC AUTOS -- See Docs. 
+    return new ExampleAuto(driveSubsystem, fuelSubsystem); 
+    //return new PathPlannerAuto("Example"); // This is for METHOD #2 - SPECIFIC AUTOS -- See Docs. 
     //return autoChooser.getSelected(); // METHOD #1 - ALL AUTOS LAODED-- See Docs.
   }
 }
