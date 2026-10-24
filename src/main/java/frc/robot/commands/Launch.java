@@ -34,8 +34,8 @@ public class Launch extends Command {
   // command doesn't require updating any values while running
   @Override
   public void execute() {
-    fuelSubsystem.setFeederRoller(6);
-    fuelSubsystem.setIntakeLauncherRoller(-6); // -12 testing 
+    fuelSubsystem.setFeederRoller(-LAUNCHING_FEEDER_VOLTAGE);
+    fuelSubsystem.setIntakeLauncherRoller(-LAUNCHING_LAUNCHER_VOLTAGE); // -12 testing 
   }
 
   // Called once the command ends or is interrupted. Stop the rollers

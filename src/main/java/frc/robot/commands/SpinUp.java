@@ -33,8 +33,8 @@ public class SpinUp extends Command {
   // command doesn't require updating any values while running
   @Override
   public void execute() {
-    fuelSubsystem.setFeederRoller(-8); 
-    fuelSubsystem.setIntakeLauncherRoller(-7); // testing values here
+    fuelSubsystem.setFeederRoller(-LAUNCHING_FEEDER_VOLTAGE); 
+    fuelSubsystem.setIntakeLauncherRoller(-LAUNCHING_LAUNCHER_VOLTAGE); // testing values here
   }
 
   // Called once the command ends or is interrupted. Stop the rollers
